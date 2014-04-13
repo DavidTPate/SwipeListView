@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:minHeight="?android:attr/listPreferredItemHeight"
+             android:layout_height="wrap_content"
+             android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/ib_view"
+            android:src="@drawable/ic_action_picture"
+            android:contentDescription="View"
+            style="@style/ImageListItemMenuItem"/>
+
+        <ImageButton
+            android:id="@+id/ib_save"
+            android:src="@drawable/ic_action_save"
+            android:contentDescription="Save"
+            style="@style/ImageListItemMenuItem"/>
+
+        <ImageButton
+            android:id="@+id/ib_share"
+            android:src="@drawable/ic_action_share"
+            android:contentDescription="Share"
+            style="@style/ImageListItemMenuItem"/>
+
+        <ImageButton
+            android:id="@+id/ib_open"
+            android:src="@drawable/ic_action_globe"
+            android:contentDescription="Open"
+            style="@style/ImageListItemMenuItem"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/front"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:text="I'm a list item and I have some text in here which takes up space."
+            android:gravity="center"/>
+
+    </LinearLayout>
+
+</FrameLayout>
