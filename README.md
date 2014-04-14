@@ -39,6 +39,7 @@ You can also depend on the .jar through Maven:
 
 Usage
 =====
+**List**
 ```xml
 <com.davidtpate.swipelistview.SwipeListView
         xmlns:swipeListView="http://schemas.android.com/apk/res-auto"
@@ -57,6 +58,53 @@ Usage
 * `closeAllWhenScrolling` - *Optional* - Enable/disable closing all currently revealed items when the list is scrolled. Default - true
 * `openOnLongPress` - *Optional* - Enable/disable long press revealing and hiding the list item that was long pressed. Default - true
 * `swipeDirection` - *Optional* - Enable/disable directional gestures. Setting this to `left` only allows swiping items left, etc. Default - both
+
+**List Item**
+```xml 
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:descendantFocusability="blocksDescendants">
+
+    <LinearLayout
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+            android:id="@+id/ib_view"
+            android:src="@drawable/ic_action_picture"/>
+
+        <ImageButton
+            android:id="@+id/ib_save"
+            android:src="@drawable/ic_action_save"/>
+
+        <ImageButton
+            android:id="@+id/ib_share"
+            android:src="@drawable/ic_action_share"/>
+
+        <ImageButton
+            android:id="@+id/ib_open"
+            android:src="@drawable/ic_action_globe"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/front"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tv_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="15dp"/>
+
+    </LinearLayout>
+</FrameLayout>
+```
 
 Developed By
 ============
