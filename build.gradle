@@ -9,4 +9,5 @@ buildscript {
     }
 }
 
+apply plugin: 'android-reporting'
 apply plugin: 'android-sdk-manager'
