@@ -1,4 +1,4 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 repositories {
     mavenCentral()
@@ -6,94 +6,19 @@ repositories {
 
 dependencies {
     compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.android.support:support-v4:19.0.+'
+    compile 'com.android.support:support-v4:21.0.+'
 }
 
 android {
     compileSdkVersion 19
-    buildToolsVersion "19.0.3"
+    buildToolsVersion "19.1.0"
 
     defaultConfig {
-        minSdkVersion 8
+        minSdkVersion 12
         targetSdkVersion 19
         versionName "0.0.1"
         versionCode 1
     }
 }
 
-apply plugin: 'maven'
-apply plugin: 'signing'
-
-version = android.defaultConfig.versionName
-group = "com.davidtpate.swipelistview"
-
-configurations {
-    archives {
-        extendsFrom configurations.default
-    }
-}
-
-if(project.hasProperty("SwipeListView.properties") && new File(project.property("SwipeListView.properties")).exists()) {
-
-    Properties props = new Properties()
-    props.load(new FileInputStream(file(project.property("SwipeListView.properties"))))
-
-    gradle.taskGraph.whenReady { taskGraph ->
-        if (taskGraph.allTasks.any { it instanceof Sign }) {
-            allprojects { ext."signing.keyId" = props['signing.keyId'] }
-            allprojects { ext."signing.secretKeyRingFile" = props['signing.secretKeyRingFile'] }
-            allprojects { ext."signing.password" = props['signing.password'] }
-        }
-    }
-
-    signing {
-        required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
-        sign configurations.archives
-    }
-
-    uploadArchives {
-
-        configuration = configurations.archives
-        repositories.mavenDeployer {
-
-            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-
-            repository(url: props['sonatypeRepo']) {
-                authentication(userName: props['sonatypeUsername'], password: props['sonatypePassword'])
-            }
-
-            pom.project {
-
-                name 'SwipeListView'
-                packaging 'aar'
-                description 'An enchanced ListView for Android providing swiping capabilities for items.'
-                url 'https://github.com/DavidTPate/SwipeListView'
-
-                scm {
-                    url 'scm:git@github.com:DavidTPate/SwipeListView.git'
-                    connection 'scm:git@github.com:DavidTPate/SwipeListView.git'
-                    developerConnection  'scm:git@github.com:DavidTPate/SwipeListView.git'
-                }
-
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                        distribution 'repo'
-                    }
-                }
-
-                developers {
-                    developer {
-                        id 'DavidTPate'
-                        name 'David Pate'
-                        email 'me@davidtpate.com'
-                    }
-                }
-
-            }
-
-        }
-    }
-
-}
+apply from: 'https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle'
